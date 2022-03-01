@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class TodoEntity {
+public class TodoModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class TodoEntity {
     @Column(nullable = false)
     private  String title;
 
-    @Column(name ="todoOrder", nullable = false)
+    @Column(name = "todoOrder", nullable = false)
     private Long order;
 
     @Column(nullable = false)

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TodoRequest {
 
-    private String title;
     private Long order;
+    private String title;
     private Boolean completed;
 }
