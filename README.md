@@ -53,7 +53,7 @@
 
    \* 클래스 내의 함수 [메소드]
 
-[6강] Ioc, DI
+## [6강] Ioc, DI
 
 1. Ioc 
    - 스프링에서 일반적인 자바 객체를 new 로 생성하여 개발자가 관리하는 것이 아닌 Spring Container에 모두 맡긴다.
@@ -68,3 +68,24 @@
     - DI 통해 불가능한 상황을 Mock와 같은 기술로 안정적 테스트
     - 코드를 확장, 변경 시 영향 최소화(추상화)
     - 순환참조를 막음
+
+## [7강] AOP 관점지향 프로그램 - 1
+
+0. Dependency
+ - implementation 'org.springframework.boot:spring-boot-starter-aop'
+
+1. AOP
+ - 스프링은 대부분 MVC 웹 어플리케이션에서는 3가지 Layer로 정의
+ - Web Layer : RestAPI 제공 Client 중심의 로직 적용
+ - Business Layer : 내부 정책에 따른 로직을 개발, 주로 해당 부분 개발
+ - Data Layer : 데이터 베이스 및 외부 연동 처리
+
+2. Annotation
+ - Aspect : 부가 기능 모듈화
+ - JoinPoint : 메소드의 정보
+ - Before : 메소드 실행 전
+ - After : 메소드 실행 후
+ - After-returning : 메소드가 정상적으로 실행된 후
+ - After-throwing : 예외가 발생한 후
+ - Around : 메소드 호출 이전, 이후, 예외발생 등 모든 시점
+ - Component : 직접 작성한 Class를 Bean으로 등록
