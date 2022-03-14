@@ -131,7 +131,7 @@
  ObjectNode.toPrettyString()
  ```
 
-## [8강] Spring Validation
+## [9강] Spring Validation
 
 - spring-boot-starter-validation
 
