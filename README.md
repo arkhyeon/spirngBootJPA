@@ -1,5 +1,8 @@
 # spirngBootJPA
 
+1. [GetMapping, RequestMapping](#[1강])
+2. [GetMapping2, PostMapping, PutMapping](#[2강])
+
 ## [1강] GetMapping, RequestMapping
 
 1. path-variable   
