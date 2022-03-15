@@ -1,7 +1,7 @@
 # spirngBootJPA
 
-1. [GetMapping, RequestMapping](#[1강])
-2. [GetMapping2, PostMapping, PutMapping](#[2강])
+1. [GetMapping, RequestMapping](#[1강]-GetMapping,-RequestMapping)
+2. [GetMapping2, PostMapping, PutMapping](#[2강]-GetMapping2,-PostMapping,-PutMapping)
 
 ## [1강] GetMapping, RequestMapping
 
