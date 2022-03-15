@@ -1,8 +1,8 @@
 # spirngBootJPA
 
-- [[1강] GetMapping, RequestMapping](#-1---getmapping--requestmapping)
-- [[2강] GetMapping2, PostMapping, PutMapping](#-2---getmapping2--postmapping--putmapping)
-- [[3강] Delete Mapping](#-3---delete-mapping)
+- [[1강] GetMapping, RequestMapping](#[1강]-getmapping,-requestmapping)
+- [[2강] GetMapping2, PostMapping, PutMapping](#[2강]-getmapping2,-postmapping,-putmapping)
+- [[3강] Delete Mapping](#[3강]-delete-mapping)
 
 ## [1강] GetMapping, RequestMapping
 
