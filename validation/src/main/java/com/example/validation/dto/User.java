@@ -1,10 +1,12 @@
 package com.example.validation.dto;
 
+import com.example.validation.annotation.YearMonth;
+
 import javax.validation.Valid;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class User {
 
@@ -19,6 +21,12 @@ public class User {
 
     @Pattern(regexp = "^\\d{2,3}-\\d{3,4}-\\d{4}$", message = "핸드폰 번호의 형식과 맞지 않습니다.")
     private String phoneNumber;
+
+    @YearMonth
+    private String reqYearMonth; //yyyymm
+
+    @Valid
+    private List<Car> cars;
 
     public String getName() {
         return name;
@@ -52,6 +60,22 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getReqYearMonth() {
+        return reqYearMonth;
+    }
+
+    public void setReqYearMonth(String reqYearMonth) {
+        this.reqYearMonth = reqYearMonth;
+    }
+
+    public List<Car> getCars() {
+        return cars;
+    }
+
+    public void setCars(List<Car> cars) {
+        this.cars = cars;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -59,6 +83,8 @@ public class User {
                 ", age=" + age +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", reqYearMonth='" + reqYearMonth + '\'' +
+                ", cars=" + cars +
                 '}';
     }
 }
