@@ -1,6 +1,10 @@
 # spirngBootJPA
 
-## [1강] GetMapping, RequestMapping
+- [[1] GetMapping, RequestMapping](#1-getmapping-requestmapping)
+- [[2강] GetMapping2, PostMapping, PutMapping](#[2강]-getmapping2,-postmapping,-putmapping)
+- [[3강] Delete Mapping](#[3강]-delete-mapping)
+
+## [1] GetMapping, RequestMapping
 
 1. path-variable   
  http://localhost:8081/api/get/pathVariable/{name}  
@@ -192,3 +196,24 @@ public Object user(@Valid @RequestBody User user, BindingResult br){
 }
 
 ```
+## [10강] Spring Validation - 2 Custom Validation
+
+1. Custom Validation
+ - 한 클래스 내에서 만들어서 사용하면 다른 클래스에서도 만들어야 하는 중복 코드 발생   
+   \> Custom Validation Annotation 생성의 이유
+   
+ EX) @YearMonth 
+ - validation annotation 생성
+   기본 값, 메세지 설정
+     - @Constraint  
+       validatedBy 정의할 validator 전달 시 Spring Boot에서 API를 호출할 때 전달한 값을 가져와 validation 수행
+     - @Target   
+       Java compiler가 annotation이 어디에 적용될지 결정
+     - @Retention  
+       Annotation이 실제 적용, 유지되는 범위
+ - validator YearMonthValidator 생성
+ 
+2. List<Car> Class
+ - @Valid 사용하여야 내부 Validation 작동
+ 
+3. return type Boolean은 메소드 명 is 시작 
