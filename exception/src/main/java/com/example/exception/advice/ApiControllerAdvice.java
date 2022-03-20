@@ -1,6 +1,8 @@
 package com.example.exception.advice;
 
 import com.example.exception.controller.ApiController;
+import com.example.exception.dto.Error;
+import com.example.exception.dto.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -10,9 +12,14 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import javax.naming.Binding;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolationException;
-import java.lang.reflect.Field;
+import javax.validation.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 @RestControllerAdvice(basePackageClasses = ApiController.class)
 public class ApiControllerAdvice {
@@ -24,7 +31,10 @@ public class ApiControllerAdvice {
     }
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public ResponseEntity methodArgumentNotValidException(MethodArgumentNotValidException e){
+    public ResponseEntity methodArgumentNotValidException(MethodArgumentNotValidException e, HttpServletRequest httpServletRequest){
+
+        List<Error> errorList = new ArrayList<>();
+
         BindingResult bindingResult = e.getBindingResult();
         bindingResult.getAllErrors().forEach((error) -> {
             FieldError fieldError = (FieldError) error;
@@ -33,40 +43,81 @@ public class ApiControllerAdvice {
             String message = fieldError.getDefaultMessage();
             String value = fieldError.getRejectedValue().toString();
 
-            System.out.println("--------------------------");
-            System.out.println(fieldName);
-            System.out.println(message);
-            System.out.println(value);
+            Error errorMessage = new Error();
+
+            errorMessage.setField(fieldName);
+            errorMessage.setMessage(message);
+            errorMessage.setInvalidValue(value);
+
+            errorList.add(errorMessage);
         });
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        ErrorResponse errorRespnse = new ErrorResponse();
+        errorRespnse.setErrorList(errorList);
+        errorRespnse.setMessage("");
+        errorRespnse.setRequestUrl(httpServletRequest.getRequestURI());
+        errorRespnse.setStatusCode(HttpStatus.BAD_REQUEST.toString());
+        errorRespnse.setResultCode("FAIL");
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorRespnse);
 
     }
 
     @ExceptionHandler(value = ConstraintViolationException.class)
-    public ResponseEntity constraintViolationException(ConstraintViolationException e){
+    public ResponseEntity constraintViolationException(ConstraintViolationException e, HttpServletRequest httpServletRequest){
+
+        List<Error> errorList = new ArrayList<>();
+
         e.getConstraintViolations().forEach((error) ->{
-            String field = error.getLeafBean().toString();
+
+            Stream<Path.Node> stream = StreamSupport.stream(error.getPropertyPath().spliterator(), false);
+            List<Path.Node> list = stream.collect(Collectors.toList());
+
+            String field = list.get(list.size() -1).getName();
             String message = error.getMessage();
             String invalidValue = error.getInvalidValue().toString();
 
-            System.out.println(field);
-            System.out.println(message);
-            System.out.println(invalidValue);
-            System.out.println(error);
-            error.getPropertyPath();
+            Error errorMessage = new Error();
+
+            errorMessage.setField(field);
+            errorMessage.setMessage(message);
+            errorMessage.setInvalidValue(invalidValue);
+
+            errorList.add(errorMessage);
         });
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+
+        ErrorResponse errorRespnse = new ErrorResponse();
+        errorRespnse.setErrorList(errorList);
+        errorRespnse.setMessage("");
+        errorRespnse.setRequestUrl(httpServletRequest.getRequestURI());
+        errorRespnse.setStatusCode(HttpStatus.BAD_REQUEST.toString());
+        errorRespnse.setResultCode("FAIL");
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorRespnse);
     }
 
     @ExceptionHandler(value = MissingServletRequestParameterException.class)
-    public ResponseEntity missingServletRequestParameterException(MissingServletRequestParameterException e){
+    public ResponseEntity missingServletRequestParameterException(MissingServletRequestParameterException e, HttpServletRequest httpServletRequest){
+
+        List<Error> errorList = new ArrayList<>();
+
         String fieldName = e.getParameterName();
-        String fieldType = e.getParameterType();
         String invalidValue = e.getMessage();
 
-        System.out.println(fieldName);
-        System.out.println(fieldType);
-        System.out.println(invalidValue);
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        Error errorMessage = new Error();
+
+        errorMessage.setField(fieldName);
+        errorMessage.setMessage(invalidValue);
+
+        errorList.add(errorMessage);
+
+        ErrorResponse errorRespnse = new ErrorResponse();
+        errorRespnse.setErrorList(errorList);
+        errorRespnse.setMessage("");
+        errorRespnse.setRequestUrl(httpServletRequest.getRequestURI());
+        errorRespnse.setStatusCode(HttpStatus.BAD_REQUEST.toString());
+        errorRespnse.setResultCode("FAIL");
+
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorRespnse);
     }
 }
