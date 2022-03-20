@@ -234,3 +234,12 @@ public Object user(@Valid @RequestBody User user, BindingResult br){
 3. @ExceptionHandler(Rest/Controller 설정)
  - @ExceptionHandler(value = [원하는 Exception Class 설정])
  - Global로 지정 시에도 Controller에 지정한 ExceptionHandler 우선 순위
+
+4. Validated
+ - 검증은 컨트롤러에서 처리하는게 좋지만 AOP 기반 메소드 요청을 가로채 검증 진행 제공
+ - 제약 조건 어노테이션에 조건이 적용될 검증 그룹 지정하여 적용
+ - 클래스 레벨에 검증 인터셉터 등록
+ - AOP : 로직 기준 핵심적 관점, 부가적 관점 나누어 관점 기준 각각 모듈화
+
+5. ConstraintViolationException : 제약조건
+6. MissingServletRequestParameterException : 필수 파라미터 결여
