@@ -260,3 +260,31 @@ public Object user(@Valid @RequestBody User user, BindingResult br){
  
 4. @Slf4j
  - 로깅 프레임 워크에 대한 추상화(인터페이스) 라이브러리
+
+ ## [15강] Filter
+ - 요청이 전달 전, 후 작업 처리 가능
+ 
+1. ContentCachingRequestWrapper / ContentCachingResponseWrapper  
+   -  생성이유 :  HttpServletRequest의 InputStream은 한 번만 읽고 그 이후는 IOException 발생
+    - HttpServletRequestWrapper(HttpServletRequest 인터페이스의 편리한 구현을 제공)의 구현체  
+    입력 스트림에서 읽은 모든 콘텐츠를 캐시하고 바이트 배열을 통해 콘텐츠를 검색
+    - Spring Project에서 직접 관리하기에 안정성 향상
+
+2. Implements Filter Method 3
+
+    - init()   
+      - Web Container(Tomcat) 시작 시 필터 객체 생성, 이때 객체가 생성되면서 최초 한 번 호출
+      - FilterConfig 객체로 설정값 받아 작업 시 필요한 객체를 초기화에 사용
+
+    - destroy()  
+       - 필터 객체가 제거될 때 실행 
+       - 초기화 시 생성했던 자원 제거 및 종료
+
+    - dofilter(ServletRequest  request ,ServletResponse response , FilterChain chain)  
+ 
+       - chain.doFilter() 메서드의 전후로 전처리 / 후처리  
+       - 전처리 : Dispatcher-Servlet 통해 사용 전 처리할 작업은 chain.doFilter() 전 정의 
+       - 후처리 : Dispatcher-Servlet 의해 사용 후 처리할 작업은 chain.doFilter() 후 정의 
+       - copyBodyToResponse : 후처리에서 로깅 시 Body 값을 한 번만 읽을 수 있기에 캐싱해둬야 사용자 response View 가능
+
+ @Component : 직접 작성한 Class를 Bean 등록
