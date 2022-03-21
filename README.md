@@ -243,3 +243,20 @@ public Object user(@Valid @RequestBody User user, BindingResult br){
 
 5. ConstraintViolationException : 제약조건
 6. MissingServletRequestParameterException : 필수 파라미터 결여
+
+ ## [14강] Lombok
+
+ - Java 라이브러리 dto의 getter, setter, toString 등의 메서드 작성을 어노테이션으로 대체
+ - compileOnly: compile 시에만 빌드하고 빌드 결과물에는 포함하지 않음
+
+1. @Data
+ - @Getter, @Setter, @ToString, @EqualsAndHashCode, @RequiredArgsConstructor 포함
+
+2. @NoArgsConstructor
+ - 기본 파라미터 없는 생성자
+
+3. @AllArgsConstructor
+ - 모든 필드 값을 파라미터로 받는 생성자
+ 
+4. @Slf4j
+ - 로깅 프레임 워크에 대한 추상화(인터페이스) 라이브러리
