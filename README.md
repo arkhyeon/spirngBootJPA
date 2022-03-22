@@ -243,3 +243,89 @@ public Object user(@Valid @RequestBody User user, BindingResult br){
 
 5. ConstraintViolationException : 제약조건
 6. MissingServletRequestParameterException : 필수 파라미터 결여
+
+## [12강] Exception Handler - 1
+
+1. Validated
+ - 검증은 컨트롤러에서 처리하는게 좋지만 AOP 기반 메소드 요청을 가로채 검증 진행 제공
+ - 제약 조건 어노테이션에 조건이 적용될 검증 그룹 지정하여 적용
+ - 클래스 레벨에 검증 인터셉터 등록
+ - AOP : 로직 기준 핵심적 관점, 부가적 관점 나누어 관점 기준 각각 모듈화
+
+2. ConstraintViolationException : 제약조건
+3. MissingServletRequestParameterException : 필수 파라미터 결여
+ 
+## [13강] Exception Handler - 2
+
+1. ErrorResponse
+ - DTO > Error, ErrorResponse 작성
+ 
+ 기존 의도를 알 수 없는 Error를 내려줬다면
+ ErrorResponse를 이용해 아래와 같이 정확한
+ 에러를 받을 수 있다.
+ ```
+ {
+     "statusCode": "400 BAD_REQUEST",
+     "requestUrl": "/api/user",
+     "code": null,
+     "message": "",
+     "resultCode": "FAIL",
+     "errorList":[
+         {
+             "field": "name",
+             "message": "크기가 1에서 10 사이여야 합니다",
+             "invalidValue": "size1to10oversize"
+         },
+         {
+             "field": "age",
+             "message": "1 이상이어야 합니다",
+             "invalidValue": "0"
+         }
+     ]
+ }
+ ```
+ 
+ ## [14강] Lombok
+
+ - Java 라이브러리 dto의 getter, setter, toString 등의 메서드 작성을 어노테이션으로 대체
+ - compileOnly: compile 시에만 빌드하고 빌드 결과물에는 포함하지 않음
+
+1. @Data
+ - @Getter, @Setter, @ToString, @EqualsAndHashCode, @RequiredArgsConstructor 포함
+
+2. @NoArgsConstructor
+ - 기본 파라미터 없는 생성자
+
+3. @AllArgsConstructor
+ - 모든 필드 값을 파라미터로 받는 생성자
+ 
+4. @Slf4j
+ - 로깅 프레임 워크에 대한 추상화(인터페이스) 라이브러리
+
+ ## [15강] Filter
+ - 요청이 전달 전, 후 작업 처리 가능
+ 
+1. ContentCachingRequestWrapper / ContentCachingResponseWrapper  
+   -  생성이유 :  HttpServletRequest의 InputStream은 한 번만 읽고 그 이후는 IOException 발생
+    - HttpServletRequestWrapper(HttpServletRequest 인터페이스의 편리한 구현을 제공)의 구현체  
+    입력 스트림에서 읽은 모든 콘텐츠를 캐시하고 바이트 배열을 통해 콘텐츠를 검색
+    - Spring Project에서 직접 관리하기에 안정성 향상
+
+2. Implements Filter Method 3
+
+    - init()   
+      - Web Container(Tomcat) 시작 시 필터 객체 생성, 이때 객체가 생성되면서 최초 한 번 호출
+      - FilterConfig 객체로 설정값 받아 작업 시 필요한 객체를 초기화에 사용
+
+    - destroy()  
+       - 필터 객체가 제거될 때 실행 
+       - 초기화 시 생성했던 자원 제거 및 종료
+
+    - dofilter(ServletRequest  request ,ServletResponse response , FilterChain chain)  
+ 
+       - chain.doFilter() 메서드의 전후로 전처리 / 후처리  
+       - 전처리 : Dispatcher-Servlet 통해 사용 전 처리할 작업은 chain.doFilter() 전 정의 
+       - 후처리 : Dispatcher-Servlet 의해 사용 후 처리할 작업은 chain.doFilter() 후 정의 
+       - copyBodyToResponse : 후처리에서 로깅 시 Body 값을 한 번만 읽을 수 있기에 캐싱해둬야 사용자 response View 가능
+
+ @Component : 직접 작성한 Class를 Bean 등록
