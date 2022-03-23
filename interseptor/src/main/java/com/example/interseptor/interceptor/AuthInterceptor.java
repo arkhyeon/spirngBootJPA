@@ -1,6 +1,7 @@
 package com.example.interseptor.interceptor;
 
 import com.example.interseptor.annotation.Auth;
+import com.example.interseptor.exception.AuthException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
@@ -34,7 +35,7 @@ public class AuthInterceptor implements HandlerInterceptor {
             if(query.equals("name=steve")){
                 return true;
             }
-            return false;
+            throw new AuthException();
         }
 
         return true;
