@@ -361,14 +361,14 @@ public Object user(@Valid @RequestBody User user, BindingResult br){
 1. @EnableAsync
  - 비동기 기능을 활성화
 
-2. CompletableFuture
- - Future
- 서로 다른 실행시간을 가지는 Future 들을 조합해서 계산, 다른 결과와 같이 계산 등 복잡한 로직을 다루기 힘듦
- - CompletionStage
- 계산의 완료는 단일 단계의 완료 뿐만 아니라 다른 여러 단계 혹은 다른 여러 단계 중의 하나로 이어질 수 있음도 포함
- 또한 각 단계에서 발생한 에러를 관리하고 전달
+2. CompletableFuture  
+ - Future  
+ 서로 다른 실행시간을 가지는 Future 들을 조합해서 계산, 다른 결과와 같이 계산 등 복잡한 로직을 다루기 힘듦  
+ - CompletionStage  
+ 계산의 완료는 단일 단계의 완료 뿐만 아니라 다른 여러 단계 혹은 다른 여러 단계 중의 하나로 이어질 수 있음도 포함  
+ 또한 각 단계에서 발생한 에러를 관리하고 전달  
  
- - Future 와 CompletionStage 를 구현한 클래스
+ - Future 와 CompletionStage 를 구현한 클래스  
  
 3. ThreadPoolTaskExecutor
  - setMaxPoolSize(100) : 쓰레드 풀의 최대 사이즈
