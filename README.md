@@ -3,6 +3,22 @@
 - [[1] GetMapping, RequestMapping](#1-getmapping-requestmapping)
 - [[2강] GetMapping2, PostMapping, PutMapping](#2강-getmapping2-postmapping-putmapping)
 - [[3강] Delete Mapping](#3강-delete-mapping)
+- [[4강] JsonInclude, 타입추론 var, Response 내려주기](#4강-jsoninclude-타입추론-var-response-내려주기)
+- [[5강] Object Mapper](#5강-object-mapper)
+- [[6강] Ioc, DI](#6강-ioc-di)
+- [[7강] AOP 관점지향 프로그램 - 1](#7강-aop-관점지향-프로그램---1)
+- [[8강] Object Mapper](#8강-object-mapper)
+- [[9강] Spring Validation](#9강-spring-validation)
+- [[10강] Spring Validation - 2 Custom Validation](#10강-spring-validation---2-custom-validation)
+- [[11강] Exception Handler](#11강-exception-handler)
+- [[12강] Exception Handler - 1](#12강-exception-handler---1)
+- [[13강] Exception Handler - 2](#13강-exception-handler---2)
+- [[14강] Lombok](#14강-lombok)
+- [[15강] Filter](#15강-filter)
+- [[16강] Interceptor - 1](#16강-interceptor---1)
+- [[17강] Interceptor - 2](#17강-interceptor---2)
+- [[18강] 비동기 Async](#18강-비동기-async)
+- [[19강] RestTemplate 사용](#19강-RestTemplate-사용)
 
 ## [1] GetMapping, RequestMapping
 
@@ -376,3 +392,57 @@ public Object user(@Valid @RequestBody User user, BindingResult br){
  - setQueueCapacity(10) : 쓰레드 풀 큐의 사이즈 corePoolSize 개수를 넘어서는 task 진입 시 queue에 해당 task들 누적 최대로 maxPoolSize 개수 만큼 가능
  - setThreadNamePrefix("Async-") : Prefix 설정
  - 실행도 : core 10개 사용 > queue 10개 누적 > core 10개 사용 > queue 10개 누적 반복 > 100개 Max Size
+
+ ## [19강] RestTemplate 사용
+
+ - Client / Server 통신
+ - 스프링에서 제공하는 http 통신에 유용하게 쓸 수 있는 템플릿
+ 
+ 1. UriComponentsBuilder  
+                .fromUriString("http://localhost:9090")  
+                .path("/api/server/hello") 
+                .encode()  
+                .queryParam("name", "aaaa")  
+                .queryParam("age", 99)  
+                .build()  
+                .toUri();  
+                
+2. ResponseEntity<UserResponse> result = restTemplate.getForEntity(uri, UserResponse.class);
+
+ - 반환 타입 result = restTemplate.반환 타입
+ 
+ getForObject / GET /    
+ 주어진 URL 주소로 HTTP GET 메서드로 객체로 결과를 반환받는다
+ 
+ getForEntity / GET  
+ 주어진 URL 주소로 HTTP GET 메서드로 결과는 ResponseEntity로 반환받는다
+ 
+ postForLocation / POST
+ POST 요청을 보내고 결과로 헤더에 저장된 URI를 결과로 반환받는다
+ 
+ postForObject / POST
+ POST 요청을 보내고 객체로 결과를 반환받는다
+ 
+ postForEntity / POST  
+ POST 요청을 보내고 결과로 ResponseEntity로 반환받는다
+ 
+ delete / DELETE  
+ 주어진 URL 주소로 HTTP DELETE 메서드를 실행한다
+ 
+ headForHeaders / HEADER  
+ 헤더의 모든 정보를 얻을 수 있으면 HTTP HEAD 메서드를 사용한다
+ 
+ put / PUT  
+ 주어진 URL 주소로 HTTP PUT 메서드를 실행한다
+ 
+ patchForObject / PATCH  
+ 주어진 URL 주소로 HTTP PATCH 메서드를 실행한다
+ 
+ optionsForAllow / OPTIONS  
+ 주어진 URL 주소에서 지원하는 HTTP 메서드를 조회한다
+ 
+ exchange / any  
+ HTTP 헤더를 새로 만들 수 있고 어떤 HTTP 메서드도 사용가능하다
+ 
+ execute / any  
+ Request/Response 콜백을 수정할 수 있다
