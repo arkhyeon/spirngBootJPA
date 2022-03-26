@@ -344,3 +344,35 @@ public Object user(@Valid @RequestBody User user, BindingResult br){
  
 2. @Retention 어느 시점까지 어노테이션의 메모리를 가져갈 지 설정   
    @Target 필드, 메소드, 클래스, 파라미터 등 선언할 수 있는 타입을 설정
+
+## [17강] Interceptor - 2
+
+1. CustomException 작성
+2. Interceptor 에 throw new CustomException 작성
+3. GlobalExceptionHandler @ControllerAdvice는, @ExceptionHandler(CustomException.class) 작성
+
+4. @ExceptionHandler
+  - @Controller, @RestController 적용된 Bean 내 발생 예외를 하나의 메서드에서 처리
+5. @ControllerAdvice
+  - 전역 발생 예외 처리
+ 
+## [18강] 비동기 Async
+
+1. @EnableAsync
+ - 비동기 기능을 활성화
+
+2. CompletableFuture  
+ - Future  
+ 서로 다른 실행시간을 가지는 Future 들을 조합해서 계산, 다른 결과와 같이 계산 등 복잡한 로직을 다루기 힘듦  
+ - CompletionStage  
+ 계산의 완료는 단일 단계의 완료 뿐만 아니라 다른 여러 단계 혹은 다른 여러 단계 중의 하나로 이어질 수 있음도 포함  
+ 또한 각 단계에서 발생한 에러를 관리하고 전달  
+ 
+ - Future 와 CompletionStage 를 구현한 클래스  
+ 
+3. ThreadPoolTaskExecutor
+ - setMaxPoolSize(100) : 쓰레드 풀의 최대 사이즈
+ - setCorePoolSize(10) : 동시에 실행시킬 쓰레드의 개수
+ - setQueueCapacity(10) : 쓰레드 풀 큐의 사이즈 corePoolSize 개수를 넘어서는 task 진입 시 queue에 해당 task들 누적 최대로 maxPoolSize 개수 만큼 가능
+ - setThreadNamePrefix("Async-") : Prefix 설정
+ - 실행도 : core 10개 사용 > queue 10개 누적 > core 10개 사용 > queue 10개 누적 반복 > 100개 Max Size
