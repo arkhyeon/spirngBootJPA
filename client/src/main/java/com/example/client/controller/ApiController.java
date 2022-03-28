@@ -3,6 +3,7 @@ package com.example.client.controller;
 import com.example.client.dto.UserResponse;
 import com.example.client.service.RestTemplateService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,6 +19,7 @@ public class ApiController {
 
     @GetMapping("/hello")
     public UserResponse getHello(){
-        return restTemlateService.hello();
+        return restTemlateService.post();
     }
+
 }
