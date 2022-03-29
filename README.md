@@ -412,37 +412,37 @@ public Object user(@Valid @RequestBody User user, BindingResult br){
  - 반환 타입 result = restTemplate.반환 타입
  
  getForObject / GET /    
- 주어진 URL 주소로 HTTP GET 메서드로 객체로 결과를 반환받는다
+ 주어진 URL 주소로 HTTP GET 메서드로 객체로 결과 반환
  
  getForEntity / GET  
- 주어진 URL 주소로 HTTP GET 메서드로 결과는 ResponseEntity로 반환받는다
+ 주어진 URL 주소로 HTTP GET 메서드로 결과는 ResponseEntity 반환
  
  postForLocation / POST
- POST 요청을 보내고 결과로 헤더에 저장된 URI를 결과로 반환받는다
+ POST 요청을 보내고 결과로 헤더에 저장된 URI를 결과 반환
  
  postForObject / POST
- POST 요청을 보내고 객체로 결과를 반환받는다
+ POST 요청을 보내고 객체로 결과 반환
  
  postForEntity / POST  
- POST 요청을 보내고 결과로 ResponseEntity로 반환받는다
+ POST 요청을 보내고 결과로 ResponseEntity 반환
  
  delete / DELETE  
- 주어진 URL 주소로 HTTP DELETE 메서드를 실행한다
+ 주어진 URL 주소로 HTTP DELETE 메서드 실행
  
  headForHeaders / HEADER  
- 헤더의 모든 정보를 얻을 수 있으면 HTTP HEAD 메서드를 사용한다
+ 헤더의 모든 정보를 얻을 수 있으면 HTTP HEAD 메서드 사용
  
  put / PUT  
- 주어진 URL 주소로 HTTP PUT 메서드를 실행한다
+ 주어진 URL 주소로 HTTP PUT 메서드 실행
  
  patchForObject / PATCH  
- 주어진 URL 주소로 HTTP PATCH 메서드를 실행한다
+ 주어진 URL 주소로 HTTP PATCH 메서드 실행
  
  optionsForAllow / OPTIONS  
- 주어진 URL 주소에서 지원하는 HTTP 메서드를 조회한다
+ 주어진 URL 주소에서 지원하는 HTTP 메서드 조회
  
  exchange / any  
- HTTP 헤더를 새로 만들 수 있고 어떤 HTTP 메서드도 사용가능하다
+ HTTP 헤더를 새로 만들 수 있고 어떤 HTTP 메서드도 사용 가능
  
  execute / any  
- Request/Response 콜백을 수정할 수 있다
+ Request/Response 콜백을 수정 가능
