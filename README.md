@@ -466,3 +466,6 @@ public Object user(@Valid @RequestBody User user, BindingResult br){
   
  3. HttpEntity 이후 response 응답 못받음.
   - 이미 사용했기에
+
+ 
+ https://www.notion.so/8c69a39a82054091bdfabc72c127eb51
