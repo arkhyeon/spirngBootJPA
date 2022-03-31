@@ -446,3 +446,26 @@ public Object user(@Valid @RequestBody User user, BindingResult br){
  
  execute / any  
  Request/Response 콜백을 수정 가능
+
+ - EXCHANGE
+ 
+ - HTTP 헤더를 새로 만들 수 있고 어떤 HTTP 메서드도 사용 가능
+ - 지정된 URI 템플릿에 대해 HTTP 메서드를 실행하여 지정된 요청 엔터티를 요청에 쓰고 응답을 ResponseEntity 반환 
+ - URI 템플릿 변수는 주어진 URI 변수가 있는 경우 이를 사용하여 확장
+ 
+ 1. Generic Type
+  - 데이터 타입 일반화
+  - 클래스/메소드에서 사용할 내부 데이터 타입을 컴파일 시 미리 지정
+  - 코드 작성 후 코드를 다양한 타입의 객체에 대하여 재사용하는 프로그래밍 기법
+  - 클래스에서 사용할 타입을 클래스 외부에서 설정하는 타입
+  - 클래스/메소드 내부에서 사용되는 객체의 타입 안정성
+  - 반환값에 대한 타입 변환 및 타입 검사에 들어가는 노력을 줄임
+  
+ 2. ParameterizedTypeReference
+  - generic 타입으로 응답
+  
+ 3. HttpEntity 이후 response 응답 못받음.
+  - 이미 사용했기에
+
+ 
+ https://www.notion.so/8c69a39a82054091bdfabc72c127eb51
