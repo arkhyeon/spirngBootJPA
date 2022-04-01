@@ -9,7 +9,10 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.net.URI;
 import java.nio.charset.Charset;
@@ -48,6 +51,32 @@ public class ServerApiController {
         ResponseEntity<String> result = restTemplate.exchange(req, String.class);
 
         return result.getBody();
+
+
+    }
+
+    @GetMapping("na")
+    public Mono<String> naver2(){
+
+        WebClient webClient = WebClient
+                .builder()
+//                .defaultHeader("X-Naver-Client-Id","kiksCFo1tDAdlV9PmQgs")
+//                .defaultHeader("X-Naver-Client-Secret","wBLeZmgyI6")
+                .build();
+
+        URI uri = UriComponentsBuilder
+                .fromUriString("https://openapi.naver.com")
+                .path("/v1/search/local.json")
+                .queryParam("query","갈비집")
+                .queryParam("display", 10)
+                .queryParam("sort", "random")
+//                .encode(Charset.forName("UTF-8"))
+                .encode()
+                .build()
+                .toUri();
+
+        return webClient.get().uri(uri).header("X-Naver-Client-Id","kiksCFo1tDAdlV9PmQgs")
+                .header("X-Naver-Client-Secret","wBLeZmgyI6").retrieve().bodyToMono(String.class);
 
 
     }
