@@ -19,6 +19,9 @@
 - [[17강] Interceptor - 2](#17강-interceptor---2)
 - [[18강] 비동기 Async](#18강-비동기-async)
 - [[19강] RestTemplate 사용](#19강-RestTemplate-사용)
+- [[복습] Naver Open Api 연동](#복습-Naver-Open-Api-연동)
+- [[복습] WebClient feat.Naver Open Api](#복습-WebClient-feat.Naver-Open-Api)
+- [[20강] JUnit](#20강-JUnit)
 
 ## [1] GetMapping, RequestMapping
 
@@ -470,6 +473,44 @@ public Object user(@Valid @RequestBody User user, BindingResult br){
  
  https://www.notion.so/8c69a39a82054091bdfabc72c127eb51
 
+ ## [복습] Naver Open Api 연동
+
+1. UriComponentsBuilder
+ - Controller에서 addAttribute로 각각 속성을 지정해주지 않아도 이 class를 이용하면 쉽게 파라미터들 전달
+ - Spring 3부터 지원, REST API 호출이후 응답을 받을 때까지 기다리는 동기 방식
+2. fromUriString
+ - 주어진 URI 문자열로 초기화되는 빌더를 작성하십시오.
+3. path
+ - 빌더의 경로에 추가합니다.
+4. queryParam
+ - 쿼리파라미터 키밸류
+5. encode
+ - 자동으로 UTF-8로 인코딩 해준다.
+6. build
+ - 인스턴스 빌드
+7. toUri
+ - 인스턴스에서 URI를 만듭니다
+ - Uniform Resource Identifier
+ - 인터넷에 있는 자원을 나타내는 유일한 주소
+ 
+ ## [복습] WebClient feat.Naver Open Api
+
+1. API 호출 Http Client 모듈
+2. RestTemplate은 Blocking방식이고, WebClient는 Non-Blocking방식
+ - Blocking : 요청하고 응답 올때까지 기다리는 방식
+ - Non-Blocking : 요청 후 응답신호가 오면 그 때 결과 처리
+ - 동기/비동기 : Blocking, Non-Blocking 차이
+   - 호출되는 함수가 바로 리턴하는지 : 호출되는 함수의 작업 완료 여부를 누가 신경쓰는지
+3. 요청자와 제공자 사이의 통신을 좀 더 효율적인 Non-Blocking방식으로 하기 위해서입니다. 
+
+
+2. Flux / Mono
+ - Flux : 0 ~ N 개의 데이터를 전달
+ - Mono : 0 ~ 1 개의 데이터를 전달
+ - 보통 여러 스트림을 하나의 결과는 Mono, 각각의 Mono를 합쳐서 하나의 여러 값을 처리할 떄 Flux
+ - Mono/Flux는 Publisher 인터페이스를 구현해서 만듦
+ - 하나의 결과를 List에 담지 않기에 Mono, Flux 존재
+ 
  ## [20강] JUnit
 
 1. TDD
