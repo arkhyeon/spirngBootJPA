@@ -469,3 +469,21 @@ public Object user(@Valid @RequestBody User user, BindingResult br){
 
  
  https://www.notion.so/8c69a39a82054091bdfabc72c127eb51
+
+ ## [20강] JUnit
+
+1. TDD
+ - 테스트 주도개발 
+ - 유지 보수 및 운영 환경 에러를 방지하기 위해 단위별로 검증하는 테스트 프레임워크
+2. 단위테스트
+ - 작성한 코드가 원하는 대로 동작하는지 검증
+
+3. JUnit
+ - 자바 유닛 테스트 프레임워크
+
+4. @Test
+ - 테스트 수행하는 메소드 지정
+ - 각각의 테스트가 서로 영향을 주지 않고 독립적으로 실행되는 것을 지향
+
+
+함수는 하나의 행동만 / 작게 더 작게
