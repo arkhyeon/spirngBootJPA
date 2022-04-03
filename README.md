@@ -20,8 +20,9 @@
 - [[18강] 비동기 Async](#18강-비동기-async)
 - [[19강] RestTemplate 사용](#19강-RestTemplate-사용)
 - [[복습] Naver Open Api 연동](#복습-Naver-Open-Api-연동)
-- [[복습] WebClient feat.Naver Open Api](#복습-WebClient-feat.Naver-Open-Api)
+- [[복습] WebClient feat.Naver Open Api](#복습-WebClient-feat-Naver-Open-Api)
 - [[20강] JUnit](#20강-JUnit)
+- [[20강] JUnit - 1](#20강-JUnit---1)
 
 ## [1] GetMapping, RequestMapping
 
@@ -528,3 +529,42 @@ public Object user(@Valid @RequestBody User user, BindingResult br){
 
 
 함수는 하나의 행동만 / 작게 더 작게
+
+## [20강] JUnit - 1
+
+1. SpringBootTest
+ - Spring Boot 테스트를 실행하는 테스트 클래스에 지정할 수 있는 Annotation
+2. MockBean
+ - Spring Boot Container 필요, Bean이 Container에 존재
+ - Spring Bean이 아닌 Mock Bean 주입
+3. MockMvc
+ - 서버에 배포하지 않고 테스트용 MVC 환경을 만들어 요청 및 전송, 응답기능을 제공하는 유틸리티 클래스
+ - perform : 설정한 MockMvc 실행 / 요청에 대한 설정 / Expect 메서드 이용 테스트
+ - MockMvcRequestBuilders
+    1. param / params / queryParam : 요청 파라미터 설정 
+    2. header / headers : 요청 헤더 설정 / contentType, accept.. 특정 헤더 설정 메서드 제공
+    3. cookie : 쿠키를 설정한다. 
+    4. content : 요청 본문 설정 
+ - andExpect : 실행결과를 검증하는 MockMvcResultMatchers에서 제공하는 ResultMatcher을 지정
+ - MockMvcResultMatchers
+   1. status : HTTP 상태 코드 검증
+   2. header : 응답 해더의 상태 검증
+   3. cookie : 쿠키 상태 검증
+   4. content : 응답 본문 내용 검증 jsonPath나 xpath와 같은 특정 콘텐츠를 위한 메서드 제공
+   5. view : 컨트롤러가 반환한 뷰 이름 검증
+   6. forwardedUrl : 이동대상의 경로를 검증 패턴으로 검증할떄는 forwardedUrlPattern 메서드를 사용
+   7. redirectedUrl : 리다이렉트 대상의 경로 또는 URL 검증 패턴으로 검증할때는 redirectedUrlPattern 메서드를 사용
+   8. model : 스프링 MVC 모델 상태 검증
+ - andDO : 실행 결과를 로그로 출력
+4. WebMvcTest
+ - MVC 테스트
+ - 웹에서 테스트하기 힘든 컨트롤러 테스트 적합
+ - 웹상에서 요청과 응답에 대해 테스트
+ - 시큐리티, 필터까지 자동으로 테스트하며, 수동으로 추가/삭제 가능
+ - @SpringBootTest 어노테이션보다 가볍게 테스트
+ - 다음과 같은 내용만 스캔하도록 제한  
+   (@Controller, @ControllerAdvice, @JsonComponent, Converter, GenericConverter, Filter, HandlerInterceptor...)
+5. BeforeEach
+ - 테스트 메서드 실행 이전에 수행
+6. jacoco
+ - 테스트 코드의 커버리지를 체크하는 라이브러리
