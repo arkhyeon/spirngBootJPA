@@ -568,3 +568,6 @@ public Object user(@Valid @RequestBody User user, BindingResult br){
  - 테스트 메서드 실행 이전에 수행
 6. jacoco
  - 테스트 코드의 커버리지를 체크하는 라이브러리
+
+ 
+  
